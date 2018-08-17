@@ -1,6 +1,7 @@
 package com.aliakbaronweb.bootpractise.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -16,6 +17,20 @@ public class Book {
             joinColumns = @JoinColumn(name = "book_id"), foreignKey = @ForeignKey(name = "book_of_author"),
             inverseJoinColumns = @JoinColumn(name = "author_id"), inverseForeignKey = @ForeignKey(name = "author_of_book"))
     private Set<Author> authors;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(id, book.id);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id);
+    }
 
     public Long getId() {
         return id;

@@ -1,6 +1,7 @@
 package com.aliakbaronweb.bootpractise.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -12,6 +13,20 @@ public class Author {
     private String LastName;
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Author author = (Author) o;
+        return Objects.equals(id, author.id);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id);
+    }
 
     public Long getId() {
         return id;
